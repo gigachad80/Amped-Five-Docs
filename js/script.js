@@ -65,11 +65,26 @@ const notesStructure = [
     { name: "6. Common Mistakes and cautions.md", title: "6. Common Mistakes and Cautions", type: "file" },
     { name: "7. Parameter Quick Reference.md", title: "7. Parameter Quick Reference", type: "file" },
     { name: "8. Forensic Best Practice for Amped 5.md", title: "8. Forensic Best Practice", type: "file" },
-    { name: "9. Cheatsheet and quick reference guide.md", title: "9. Cheatsheet", type: "file" }
+    { name: "9. Cheatsheet and quick reference guide.md", title: "9. Cheatsheet", type: "file" },
+    {
+        name: "10. Image Hints",
+        title: "10. Image Hints",
+        type: "folder",
+        children: [
+            { name: "Amped_FIVE_Filter_Categories_Reference_-_Comprehensive_overview_of_all_major_filter_groups,_functions,_and_use_cases.png", title: "Filter Categories Reference", type: "file" },
+            { name: "Amped_FIVE_Filter_Reference_Matrix_-_Comprehensive_guide_for_each_filter_with_parameters,_situations,_and_workflow_placement.png", title: "Filter Reference Matrix", type: "file" },
+            { name: "Amped_FIVE_Filter_Selection_Decision_Tree_-_Diagnostic_flowchart_for_choosing_correct_filters_based_on_image_problems-removebg.jpg", title: "Filter Selection Decision Tree", type: "file" },
+            { name: "Amped_FIVE_Real-World_Forensic_Scenarios_-_Filter_sequences_for_common_image_analysis_situations.png", title: "Real-World Forensic Scenarios", type: "file" },
+            { name: "amped_five_filters (1).png", title: "Amped Five Filters", type: "file" },
+            { name: "amped_five_modules.png", title: "Amped Five Modules", type: "file" },
+            { name: "forensic_filter_table (1).png", title: "Forensic Filter Table", type: "file" },
+            { name: "forensic_reference_table.png", title: "Forensic Reference Table", type: "file" }
+        ]
+    }
 ];
 
 // Variables
-let searchIndex = []; // Stores { fileName, title, content }
+let searchIndex = [];
 let isIndexing = false;
 
 // Initialize
@@ -84,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     initSearch();
     loadNoteFromURL();
 
-    // Start background indexing for deep search
     buildSearchIndex();
 });
 
@@ -106,7 +120,6 @@ function findFilePath(structure, fileName, currentPath = '') {
 
 /**
  * CORE: Search Indexer
- * Fetches all MD files in the background to enable content search
  */
 async function buildSearchIndex() {
     if (isIndexing) return;
@@ -142,23 +155,51 @@ async function buildSearchIndex() {
 }
 
 /**
- * CORE: Content Loader
+ * HELPER: Check if file is an image
+ */
+function isImageFile(fileName) {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp'];
+    return imageExtensions.some(ext => fileName.toLowerCase().endsWith(ext));
+}
+
+/**
+ * CORE: Content Loader with Image Support
  */
 async function loadMarkdownFile(fileElement) {
     const fileName = fileElement.getAttribute('data-file');
     const contentArea = document.getElementById('markdown-content');
     if (!contentArea) return;
 
-    // UI State
     document.querySelectorAll('.tree-file').forEach(f => f.classList.remove('active'));
     fileElement.classList.add('active');
 
-    // URL Update
     const pageTitle = fileElement.textContent.trim();
     window.history.pushState({ file: fileName }, pageTitle, `?page=${encodeURIComponent(fileName)}`);
 
     contentArea.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
 
+    // Check if it's an image file
+    if (isImageFile(fileName)) {
+        const relativePath = findFilePath(notesStructure, fileName);
+        const imagePath = `content/${relativePath}`;
+
+        contentArea.innerHTML = `
+            <div class="image-viewer" style="text-align: center; padding: 2rem 0;">
+                <h2 style="margin-bottom: 2rem; color: var(--text-primary);">${pageTitle}</h2>
+                <div style="background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <img src="${imagePath}" alt="${fileName}" 
+                        style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'padding: 4rem; color: var(--text-secondary); border: 2px dashed var(--border-color); border-radius: 8px;\\'><i class=\\'fas fa-exclamation-triangle\\' style=\\'font-size: 3rem; margin-bottom: 1rem; color: #eab308;\\'></i><p>Image not found</p><p style=\\'font-size: 0.8rem; opacity: 0.7;\\'>Path: ${imagePath}</p></div>';">
+                </div>
+            </div>
+        `;
+
+        document.querySelector('.notes-content')?.classList.remove('hide-note-header');
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    // Load markdown file
     try {
         const relativePath = findFilePath(notesStructure, fileName);
         const response = await fetch(`content/${relativePath}`);
@@ -168,7 +209,7 @@ async function loadMarkdownFile(fileElement) {
         const html = window.markdownConverter.makeHtml(markdown);
 
         contentArea.innerHTML = html;
-        document.querySelector('.notes-content').classList.remove('hide-note-header');
+        document.querySelector('.notes-content')?.classList.remove('hide-note-header');
 
         if (typeof Prism !== 'undefined') Prism.highlightAll();
         window.scrollTo(0, 0);
@@ -208,17 +249,14 @@ function performSearch(term) {
     const treeFiles = document.querySelectorAll('.tree-file');
     const folders = document.querySelectorAll('.tree-folder');
 
-    // 1. Title matching (instant)
     let visibleFiles = new Set();
 
     treeFiles.forEach(file => {
         const fileName = file.getAttribute('data-file');
         const titleText = file.textContent.toLowerCase();
 
-        // Check if title matches
         let isMatch = titleText.includes(term);
 
-        // 2. Content matching (if indexed)
         if (!isMatch && searchIndex.length > 0) {
             const indexed = searchIndex.find(idx => idx.name === fileName);
             if (indexed && indexed.content.includes(term)) {
@@ -231,7 +269,6 @@ function performSearch(term) {
             file.classList.add('search-match');
             visibleFiles.add(file);
 
-            // Expand parents
             let parent = file.closest('.tree-folder');
             while (parent) {
                 parent.classList.add('expanded');
@@ -244,7 +281,6 @@ function performSearch(term) {
         }
     });
 
-    // Hide empty folders
     folders.forEach(folder => {
         const hasVisibleChildren = folder.querySelector('.tree-file[style*="display: flex"]');
         folder.style.display = hasVisibleChildren ? 'block' : 'none';
@@ -258,7 +294,6 @@ function resetSidebar() {
     });
     document.querySelectorAll('.tree-folder').forEach(f => {
         f.style.display = 'block';
-        // Keep main folders expanded by default or as per initial state
     });
 }
 
@@ -280,7 +315,8 @@ function initNotesTree() {
                         <ul class="tree-children">${buildTreeHTML(item.children)}</ul>
                     </li>`;
             } else {
-                html += `<li class="tree-item tree-file" data-file="${item.name}"><i class="far fa-file"></i><span>${item.title}</span></li>`;
+                const icon = isImageFile(item.name) ? 'fa-image' : 'fa-file';
+                html += `<li class="tree-item tree-file" data-file="${item.name}"><i class="far ${icon}"></i><span>${item.title}</span></li>`;
             }
         });
         return html;
