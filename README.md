@@ -6,7 +6,7 @@
 
 * [ ] Write Proper README
 * [x] Make it mobile responsive and better UX
-* [x] Enhance the code ( since site is vibe-coded )
+* [X] Enhance the code ( since site is vibe-coded )
 
 # Contributing
 
