@@ -10,7 +10,7 @@
 
 # Contributing
 
-In the meantime, if you want to improve the site, feel free to contribute or make it better.
+In the meantime, if you want to contribute, feel free to contribute or make it better.
 I’ll credit you in the README 💚
 #opensource
 LOLXD open-source docs for paid software
