@@ -1,364 +1,434 @@
-/**
- * FILE STRUCTURE CONFIGURATION
- */
-const notesStructure = [
-    { name: "1. Introduction to Amped 5.md", title: "1. Introduction to Amped 5", type: "file" },
-    {
-        name: "2. Modules",
-        title: "2. Modules",
-        type: "folder",
-        children: [
-            { name: "2.1 Load Module.md", title: "2.1 Load Module", type: "file" },
-            { name: "2.2 Interlace Module.md", title: "2.2 Interlace Module", type: "file" },
-            { name: "2.3 Analyze Module.md", title: "2.3 Analyze Module", type: "file" },
-            { name: "2.4 Deblur Module.md", title: "2.4 Deblur Module", type: "file" },
-            { name: "2.5 Extract Module.md", title: "2.5 Extract Module", type: "file" },
-            { name: "2.6 Edit Module.md", title: "2.6 Edit Module", type: "file" },
-            { name: "2.7 Sharpend Module.md", title: "2.7 Sharpen Module", type: "file" },
-            { name: "2.8 Denoise Module.md", title: "2.8 Denoise Module", type: "file" },
-            { name: "2.9 Integrate Module.md", title: "2.9 Integrate Module", type: "file" },
-            { name: "2.10 Adjust Module.md", title: "2.10 Adjust Module", type: "file" },
-            { name: "2.11 Measure Module.md", title: "2.11 Measure Module", type: "file" },
-            { name: "2.12 Present Module.md", title: "2.12 Present Module", type: "file" }
-        ]
-    },
-    {
-        name: "3. Workflow Guide",
-        title: "3. Workflow Guide",
-        type: "folder",
-        children: [
-            { name: "3.1 Recommended Workflow sequence.md", title: "3.1 Recommended Workflow Sequence", type: "file" },
-            { name: "3.2 Critical Workflow Priniciples.md", title: "3.2 Critical Workflow Principles", type: "file" }
-        ]
-    },
-    {
-        name: "4. Forensic Scenario Workflows",
-        title: "4. Forensic Scenario Workflows",
-        type: "folder",
-        children: [
-            { name: "Scenario 1- Licence Plate Motion Blur.md", title: "Scenario 1 - Licence Plate Motion Blur", type: "file" },
-            { name: "Scenario 2 - Fingerprint on Textured Wall.md", title: "Scenario 2 - Fingerprint on Textured Wall", type: "file" },
-            { name: "Scenario 3 - DarkFace or Backlit Object.md", title: "Scenario 3 - Dark Face or Backlit Object", type: "file" },
-            { name: "Scenario 4 - Noisy Low-Light Video.md", title: "Scenario 4 - Noisy Low-Light Video", type: "file" },
-            { name: "Scenario 5 - Compressed DVR Footage H.264.md", title: "Scenario 5 - Compressed DVR Footage H.264", type: "file" },
-            { name: "Scenario 6 - Fisheye Dome camera ( Height Measurement).md", title: "Scenario 6 - Fisheye Dome Camera", type: "file" },
-            { name: "Scenario 7 - Footwear or Tire Mark Impression.md", title: "Scenario 7 - Footwear or Tire Mark Impression", type: "file" },
-            { name: "Scenario 8 - Colored Text or Stamp on Colored Background.md", title: "Scenario 8 - Colored Text on Colored Background", type: "file" },
-            { name: "Scenario 9 - Moving Plate at Different Angles (Multi-Frame).md", title: "Scenario 9 - Moving Plate (Multi-Frame)", type: "file" },
-            { name: "Scenario 10 - Shaky Handheld Video.md", title: "Scenario 10 - Shaky Handheld Video", type: "file" },
-            { name: "Scenario 11 - Grid or Fence Pattern Interference.md", title: "Scenario 11 - Grid or Fence Pattern Interference", type: "file" },
-            { name: "Scenario 12 - Mixed Lighting Environments.md", title: "Scenario 12 - Mixed Lighting Environments", type: "file" }
-        ]
-    },
-    {
-        name: "5. Decision Matrices",
-        title: "5. Decision Matrices",
-        type: "folder",
-        children: [
-            { name: "5.1 Denoise Filter Section.md", title: "5.1 Denoise Filter Selection", type: "file" },
-            { name: "5.2 Contrast Enhancement.md", title: "5.2 Contrast Enhancement", type: "file" },
-            { name: "5.3 Deblur Type selection.md", title: "5.3 Deblur Type Selection", type: "file" },
-            { name: "5.4 Sharpening Selection.md", title: "5.4 Sharpening Selection", type: "file" },
-            { name: "5.5 Multi-Frame Processing Selection.md", title: "5.5 Multi-Frame Processing Selection", type: "file" }
-        ]
-    },
-    { name: "6. Common Mistakes and cautions.md", title: "6. Common Mistakes and Cautions", type: "file" },
-    { name: "7. Parameter Quick Reference.md", title: "7. Parameter Quick Reference", type: "file" },
-    { name: "8. Forensic Best Practice for Amped 5.md", title: "8. Forensic Best Practice", type: "file" },
-    { name: "9. Cheatsheet and quick reference guide.md", title: "9. Cheatsheet", type: "file" },
-    {
-        name: "10. Image Hints",
-        title: "10. Image Hints",
-        type: "folder",
-        children: [
-            { name: "Amped_FIVE_Filter_Categories_Reference_-_Comprehensive_overview_of_all_major_filter_groups,_functions,_and_use_cases.png", title: "Filter Categories Reference", type: "file" },
-            { name: "Amped_FIVE_Filter_Reference_Matrix_-_Comprehensive_guide_for_each_filter_with_parameters,_situations,_and_workflow_placement.png", title: "Filter Reference Matrix", type: "file" },
-            { name: "Amped_FIVE_Filter_Selection_Decision_Tree_-_Diagnostic_flowchart_for_choosing_correct_filters_based_on_image_problems-removebg.jpg", title: "Filter Selection Decision Tree", type: "file" },
-            { name: "Amped_FIVE_Real-World_Forensic_Scenarios_-_Filter_sequences_for_common_image_analysis_situations.png", title: "Real-World Forensic Scenarios", type: "file" },
-            { name: "amped_five_filters (1).png", title: "Amped Five Filters", type: "file" },
-            { name: "amped_five_modules.png", title: "Amped Five Modules", type: "file" },
-            { name: "forensic_filter_table (1).png", title: "Forensic Filter Table", type: "file" },
-            { name: "forensic_reference_table.png", title: "Forensic Reference Table", type: "file" }
-        ]
-    }
-];
+ (function () {
+                'use strict';
 
-// Variables
-let searchIndex = [];
-let isIndexing = false;
+                const CONFIG = [
+                    {
+                        category: "Getting Started",
+                        items: [
+                            { title: "Introduction", path: "content/1. Introduction to Amped 5.md" },
+                            { title: "Common Mistakes", path: "content/6. Common Mistakes and cautions.md" },
+                            { title: "Parameter Ref", path: "content/7. Parameter Quick Reference.md" },
+                            { title: "Best Practices", path: "content/8. Forensic Best Practice for Amped 5.md" },
+                            { title: "Cheatsheet", path: "content/9. Cheatsheet and quick reference guide.md" },
+                        ]
+                    },
+                    {
+                        category: "Modules",
+                        items: [
+                            { title: "Load Module", path: "content/2. Modules/2.1 Load Module.md" },
+                            { title: "Interlace", path: "content/2. Modules/2.2 Interlace Module.md" },
+                            { title: "Analyze", path: "content/2. Modules/2.3 Analyze Module.md" },
+                            { title: "Deblur", path: "content/2. Modules/2.4 Deblur Module.md" },
+                            { title: "Extract", path: "content/2. Modules/2.5 Extract Module.md" },
+                            { title: "Edit", path: "content/2. Modules/2.6 Edit Module.md" },
+                            { title: "Sharpen", path: "content/2. Modules/2.7 Sharpend Module.md" },
+                            { title: "Denoise", path: "content/2. Modules/2.8 Denoise Module.md" },
+                            { title: "Integrate", path: "content/2. Modules/2.9 Integrate Module.md" },
+                            { title: "Adjust", path: "content/2. Modules/2.10 Adjust Module.md" },
+                            { title: "Measure", path: "content/2. Modules/2.11 Measure Module.md" },
+                            { title: "Present", path: "content/2. Modules/2.12 Present Module.md" },
+                        ]
+                    },
+                    {
+                        category: "Workflow Guide",
+                        items: [
+                            { title: "Recommended Seq", path: "content/3. Workflow Guide/3.1 Recommended Workflow sequence.md" },
+                            { title: "Critical Principles", path: "content/3. Workflow Guide/3.2 Critical Workflow Priniciples.md" }
+                        ]
+                    },
+                    {
+                        category: "Forensic Scenarios",
+                        items: [
+                            { title: "License Plate Blur", path: "content/4. Forensic Scenario Workflows/Scenario 1- Licence Plate Motion Blur.md" },
+                            { title: "Fingerprints", path: "content/4. Forensic Scenario Workflows/Scenario 2 - Fingerprint on Textured Wall.md" },
+                            { title: "Dark Face/Backlit", path: "content/4. Forensic Scenario Workflows/Scenario 3 - DarkFace or Backlit Object.md" },
+                            { title: "Low-Light Video", path: "content/4. Forensic Scenario Workflows/Scenario 4 - Noisy Low-Light Video.md" },
+                            { title: "DVR H.264", path: "content/4. Forensic Scenario Workflows/Scenario 5 - Compressed DVR Footage H.264.md" },
+                            { title: "Fisheye Dome Camera", path: "content/4. Forensic Scenario Workflows/Scenario 6 - Fisheye Dome camera ( Height Measurement).md" },
+                            { title: "Footwear/Tire Marks", path: "content/4. Forensic Scenario Workflows/Scenario 7 - Footwear or Tire Mark Impression.md" },
+                            { title: "Colored Text", path: "content/4. Forensic Scenario Workflows/Scenario 8 - Colored Text or Stamp on Colored Background.md" },
+                            { title: "Multi-Angle Plates", path: "content/4. Forensic Scenario Workflows/Scenario 9 - Moving Plate at Different Angles (Multi-Frame).md" },
+                            { title: "Shaky Video", path: "content/4. Forensic Scenario Workflows/Scenario 10 - Shaky Handheld Video.md" },
+                            { title: "Grid/Fence Pattern", path: "content/4. Forensic Scenario Workflows/Scenario 11 - Grid or Fence Pattern Interference.md" },
+                            { title: "Mixed Lighting", path: "content/4. Forensic Scenario Workflows/Scenario 12 - Mixed Lighting Environments.md" }
+                        ]
+                    },
+                    {
+                        category: "Decision Matrices",
+                        items: [
+                            { title: "Denoise Filter", path: "content/5. Decision Matrices/5.1 Denoise Filter Section.md" },
+                            { title: "Contrast", path: "content/5. Decision Matrices/5.2 Contrast Enhancement.md" },
+                            { title: "Deblur Type", path: "content/5. Decision Matrices/5.3 Deblur Type selection.md" },
+                            { title: "Sharpening", path: "content/5. Decision Matrices/5.4 Sharpening Selection.md" },
+                            { title: "Multi-Frame", path: "content/5. Decision Matrices/5.5 Multi-Frame Processing Selection.md" }
+                        ]
+                    },
+                    // 🆕 ADD THIS NEW SECTION
+                    {
+                        category: "Image Hints",
+                        items: [
+                            { title: "Filter Categories Overview", path: "content/10. Image Hints/Amped_FIVE_Filter_Categories_Reference_-_Comprehensive_overview_of_all_major_filter_groups,_functions,_and_use_cases.png" },
+                            { title: "Filter Reference Matrix", path: "content/10. Image Hints/Amped_FIVE_Filter_Reference_Matrix_-_Comprehensive_guide_for_each_filter_with_parameters,_situations,_and_workflow_placement.png" },
+                            { title: "Filter Decision Tree", path: "content/10. Image Hints/Amped_FIVE_Filter_Selection_Decision_Tree_-_Diagnostic_flowchart_for_choosing_correct_filters_based_on_image_problems-removebg.jpg" },
+                            { title: "Real-World Scenarios", path: "content/10. Image Hints/Amped_FIVE_Real-World_Forensic_Scenarios_-_Filter_sequences_for_common_image_analysis_situations.png" },
+                            { title: "Amped FIVE Filters", path: "content/10. Image Hints/amped_five_filters (1).png" },
+                            { title: "Amped FIVE Modules", path: "content/10. Image Hints/amped_five_modules.png" },
+                            { title: "Forensic Filter Table", path: "content/10. Image Hints/forensic_filter_table (1).png" },
+                            { title: "Forensic Reference Table", path: "content/10. Image Hints/forensic_reference_table.png" }
+                        ]
+                    }
+                ];
 
-// Initialize
-document.addEventListener('DOMContentLoaded', async function () {
-    const yearElement = document.getElementById('current-year');
-    if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-    initMarkdownConverter();
-    initNotesTree();
-    initMobileMenu();
-    initMobileSidebar();
-    initSearch();
-    loadNoteFromURL();
+                // Shortcuts
+                const $ = id => document.getElementById(id);
+                const $$ = sel => document.querySelectorAll(sel);
 
-    buildSearchIndex();
-});
+                // State with caching
+                const state = {
+                    cache: {},
+                    currentDoc: null
+                };
 
-/**
- * HELPER: Find file path
- */
-function findFilePath(structure, fileName, currentPath = '') {
-    for (const item of structure) {
-        if (item.type === 'file' && item.name === fileName) {
-            return currentPath ? `${currentPath}/${item.name}` : item.name;
-        }
-        if (item.type === 'folder' && item.children) {
-            const path = findFilePath(item.children, fileName, currentPath ? `${currentPath}/${item.name}` : item.name);
-            if (path) return path;
-        }
-    }
-    return null;
-}
+                const els = {
+                    landing: $('landing-view'),
+                    docs: $('docs-view'),
+                    content: $('markdown-output'),
+                    desktopSidebar: $('desktop-sidebar-content'),
+                    mobileSidebar: $('mobile-sidebar-content'),
+                    mobileMenu: $('mobile-menu'),
+                    mobileToggle: $('mobile-menu-toggle'),
+                    breadCat: $('breadcrumb-cat'),
+                    breadPage: $('breadcrumb-page'),
+                    searchGlobal: $('global-search'),
+                    searchMobile: $('mobile-search'),
+                    searchResults: $('search-results'),
+                    mobileSearchResults: $('mobile-search-results'),
+                    toc: $('toc-container')
+                };
 
-/**
- * CORE: Search Indexer
- */
-async function buildSearchIndex() {
-    if (isIndexing) return;
-    isIndexing = true;
+                // CORE FUNCTIONS
+                window.showLanding = () => {
+                    els.landing.classList.remove('hidden');
+                    els.docs.classList.add('hidden');
+                    els.searchResults.classList.add('hidden');
+                    els.mobileSearchResults.classList.add('hidden');
+                    els.searchGlobal.value = '';
+                    els.searchMobile.value = '';
+                    window.scrollTo(0, 0);
+                };
 
-    const allFiles = [];
-    const flatten = (items) => {
-        items.forEach(i => {
-            if (i.type === 'file' && i.name.endsWith('.md')) allFiles.push(i);
-            else if (i.children) flatten(i.children);
-        });
-    };
-    flatten(notesStructure);
+                window.enterDocs = (startCategory, specificTitle) => {
+                    console.log('enterDocs called:', startCategory, specificTitle);
+                    els.landing.classList.add('hidden');
+                    els.docs.classList.remove('hidden');
+                    window.scrollTo(0, 0);
 
-    for (const file of allFiles) {
-        try {
-            const path = findFilePath(notesStructure, file.name);
-            const response = await fetch(`content/${path}`);
-            if (response.ok) {
-                const text = await response.text();
-                searchIndex.push({
-                    name: file.name,
-                    title: file.title,
-                    content: text.toLowerCase()
-                });
-            }
-        } catch (e) {
-            console.warn(`Could not index ${file.name}`);
-        }
-    }
-    isIndexing = false;
-    console.log("Deep search index ready.");
-}
+                    let itemToLoad = null;
+                    let categoryToUse = null;
 
-/**
- * HELPER: Check if file is an image
- */
-function isImageFile(fileName) {
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp'];
-    return imageExtensions.some(ext => fileName.toLowerCase().endsWith(ext));
-}
+                    if (startCategory) {
+                        const group = CONFIG.find(g => g.category === startCategory);
+                        if (group && group.items.length > 0) {
+                            itemToLoad = group.items[0];
+                            categoryToUse = group.category;
 
-/**
- * CORE: Content Loader with Image Support
- */
-async function loadMarkdownFile(fileElement) {
-    const fileName = fileElement.getAttribute('data-file');
-    const contentArea = document.getElementById('markdown-content');
-    if (!contentArea) return;
+                            if (specificTitle) {
+                                const found = group.items.find(i => i.title === specificTitle);
+                                if (found) itemToLoad = found;
+                            }
+                        }
+                    }
 
-    document.querySelectorAll('.tree-file').forEach(f => f.classList.remove('active'));
-    fileElement.classList.add('active');
+                    if (!itemToLoad) {
+                        itemToLoad = CONFIG[0].items[0];
+                        categoryToUse = CONFIG[0].category;
+                    }
 
-    const pageTitle = fileElement.textContent.trim();
-    window.history.pushState({ file: fileName }, pageTitle, `?page=${encodeURIComponent(fileName)}`);
+                    console.log('Loading:', itemToLoad, categoryToUse);
+                    loadDoc(itemToLoad, categoryToUse);
+                };
 
-    contentArea.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+                async function loadDoc(item, category) {
+                    console.log('loadDoc called:', item.title, item.path);
+                    state.currentDoc = { item, category };
 
-    // Check if it's an image file
-    if (isImageFile(fileName)) {
-        const relativePath = findFilePath(notesStructure, fileName);
-        const imagePath = `content/${relativePath}`;
+                    // Loading spinner
+                    els.content.innerHTML = '<div class="flex items-center justify-center py-20"><div class="text-center"><i class="fas fa-spinner fa-spin text-4xl text-accent mb-4"></i><p class="text-zinc-400">Loading ' + item.title + '...</p></div></div>';
 
-        contentArea.innerHTML = `
-            <div class="image-viewer" style="text-align: center; padding: 2rem 0;">
-                <h2 style="margin-bottom: 2rem; color: var(--text-primary);">${pageTitle}</h2>
-                <div style="background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
-                    <img src="${imagePath}" alt="${fileName}" 
-                        style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"
-                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'padding: 4rem; color: var(--text-secondary); border: 2px dashed var(--border-color); border-radius: 8px;\\'><i class=\\'fas fa-exclamation-triangle\\' style=\\'font-size: 3rem; margin-bottom: 1rem; color: #eab308;\\'></i><p>Image not found</p><p style=\\'font-size: 0.8rem; opacity: 0.7;\\'>Path: ${imagePath}</p></div>';">
+                    try {
+                        // Check if this is an image file
+                        const isImage = /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(item.path);
+
+                        if (isImage) {
+                            // Display image directly
+                            els.content.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-8">
+                    <h2 class="text-2xl font-bold text-white mb-6">${item.title}</h2>
+                    <img src="${item.path}" alt="${item.title}" class="max-w-full h-auto rounded-lg border border-border shadow-xl" 
+                         onerror="this.parentElement.innerHTML='<div class=\\'p-6 border-2 border-red-900 bg-red-900/20 text-red-200 rounded-lg\\'><i class=\\'fas fa-exclamation-triangle mr-2\\'></i>Image failed to load: ${item.path}</div>'">
+                    <p class="text-zinc-400 text-sm mt-4 italic">Click image to view full size</p>
                 </div>
-            </div>
-        `;
+            `;
 
-        document.querySelector('.notes-content')?.classList.remove('hide-note-header');
-        window.scrollTo(0, 0);
-        return;
-    }
+                            els.breadCat.textContent = category;
+                            els.breadPage.textContent = item.title;
 
-    // Load markdown file
-    try {
-        const relativePath = findFilePath(notesStructure, fileName);
-        const response = await fetch(`content/${relativePath}`);
-        if (!response.ok) throw new Error("File not found");
+                            // Clear TOC for images
+                            els.toc.innerHTML = '<p class="text-xs text-zinc-600 italic">No sections (image view)</p>';
 
-        const markdown = await response.text();
-        const html = window.markdownConverter.makeHtml(markdown);
+                            updateActiveSidebar(item.title);
+                            console.log('Image loaded successfully');
+                            return;
+                        }
 
-        contentArea.innerHTML = html;
-        document.querySelector('.notes-content')?.classList.remove('hide-note-header');
+                        // Original markdown loading logic
+                        let content = state.cache[item.path];
 
-        if (typeof Prism !== 'undefined') Prism.highlightAll();
-        window.scrollTo(0, 0);
-    } catch (error) {
-        contentArea.innerHTML = `<div class="error-msg">Error: ${error.message}</div>`;
-    }
-}
+                        if (!content) {
+                            console.log('Fetching:', item.path);
+                            const res = await fetch(item.path);
+                            if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + res.statusText);
+                            content = await res.text();
+                            state.cache[item.path] = content;
+                            console.log('Cached:', item.path);
+                        } else {
+                            console.log('Using cache:', item.path);
+                        }
 
-/**
- * CORE: Search Logic
- */
-function initSearch() {
-    const input = document.getElementById('search-notes');
-    const clearBtn = document.querySelector('.clear-search');
-    if (!input) return;
+                        marked.setOptions({ breaks: true, gfm: true, headerIds: true });
+                        els.content.innerHTML = marked.parse(content);
 
-    input.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase().trim();
+                        $$('#markdown-output pre code').forEach(block => hljs.highlightElement(block));
 
-        if (term.length > 0) {
-            clearBtn.style.display = 'block';
-            performSearch(term);
-        } else {
-            clearBtn.style.display = 'none';
-            resetSidebar();
-        }
-    });
+                        // Enhanced image handling
+                        $$('#markdown-output img').forEach(img => {
+                            const src = img.getAttribute('src');
+                            if (!src || src.startsWith('http') || src.startsWith('data:')) return;
 
-    clearBtn.addEventListener('click', () => {
-        input.value = '';
-        clearBtn.style.display = 'none';
-        resetSidebar();
-    });
-}
+                            if (src.startsWith('../images/')) {
+                                img.src = src.replace('../images/', 'content/images/');
+                            } else if (src.startsWith('images/')) {
+                                img.src = 'content/' + src;
+                            } else if (!src.startsWith('content/')) {
+                                const docPath = state.currentDoc.item.path;
+                                const docDir = docPath.substring(0, docPath.lastIndexOf('/'));
+                                img.src = docDir + '/' + src;
+                            }
 
-function performSearch(term) {
-    const treeFiles = document.querySelectorAll('.tree-file');
-    const folders = document.querySelectorAll('.tree-folder');
+                            img.loading = 'lazy';
+                            img.onerror = function () {
+                                console.warn('Image failed:', this.src);
+                                this.style.display = 'none';
+                            };
+                        });
 
-    let visibleFiles = new Set();
+                        els.breadCat.textContent = category;
+                        els.breadPage.textContent = item.title;
 
-    treeFiles.forEach(file => {
-        const fileName = file.getAttribute('data-file');
-        const titleText = file.textContent.toLowerCase();
+                        generateTOC();
+                        updateActiveSidebar(item.title);
 
-        let isMatch = titleText.includes(term);
+                        console.log('Document loaded successfully');
 
-        if (!isMatch && searchIndex.length > 0) {
-            const indexed = searchIndex.find(idx => idx.name === fileName);
-            if (indexed && indexed.content.includes(term)) {
-                isMatch = true;
-            }
-        }
+                    } catch (err) {
+                        console.error('Load error:', err);
+                        els.content.innerHTML = '<div class="p-6 border-2 border-red-900 bg-red-900/20 text-red-200 rounded-lg"><h3 class="font-bold text-lg mb-3"><i class="fas fa-exclamation-triangle mr-2"></i>Failed to Load Document</h3><p class="text-sm mb-2"><strong>File:</strong> <code class="bg-red-950 px-2 py-1 rounded">' + item.path + '</code></p><p class="text-sm mb-3"><strong>Error:</strong> ' + err.message + '</p><div class="bg-red-950/50 p-3 rounded text-xs"><p class="mb-2"><strong>Troubleshooting:</strong></p><ul class="list-disc list-inside space-y-1"><li>Make sure you are running a local server</li><li>Verify files exist in <code>content/</code></li><li>Try: <code class="bg-red-900 px-1 rounded">python -m http.server 8000</code></li><li>Check browser console (F12) for details</li></ul></div></div>';
+                    }
+                }
 
-        if (isMatch) {
-            file.style.display = 'flex';
-            file.classList.add('search-match');
-            visibleFiles.add(file);
+                function generateTOC() {
+                    try {
+                        els.toc.innerHTML = '';
+                        const headers = $$('#markdown-output h2, #markdown-output h3');
 
-            let parent = file.closest('.tree-folder');
-            while (parent) {
-                parent.classList.add('expanded');
-                parent.style.display = 'block';
-                parent = parent.parentElement.closest('.tree-folder');
-            }
-        } else {
-            file.style.display = 'none';
-            file.classList.remove('search-match');
-        }
-    });
+                        if (headers.length === 0) {
+                            els.toc.innerHTML = '<p class="text-xs text-zinc-600 italic">No sections</p>';
+                            return;
+                        }
 
-    folders.forEach(folder => {
-        const hasVisibleChildren = folder.querySelector('.tree-file[style*="display: flex"]');
-        folder.style.display = hasVisibleChildren ? 'block' : 'none';
-    });
-}
+                        headers.forEach((h, i) => {
+                            h.id = 'toc-' + i;
+                            const a = document.createElement('a');
+                            a.href = '#toc-' + i;
+                            a.className = 'block py-1.5 hover:text-accent transition-colors ' + (h.tagName === 'H3' ? 'pl-3 text-xs' : 'font-medium');
+                            a.textContent = h.textContent;
+                            a.onclick = e => {
+                                e.preventDefault();
+                                h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                history.pushState(null, '', a.href);
+                            };
+                            els.toc.appendChild(a);
+                        });
+                    } catch (err) {
+                        console.error('TOC error:', err);
+                    }
+                }
 
-function resetSidebar() {
-    document.querySelectorAll('.tree-file').forEach(f => {
-        f.style.display = 'flex';
-        f.classList.remove('search-match');
-    });
-    document.querySelectorAll('.tree-folder').forEach(f => {
-        f.style.display = 'block';
-    });
-}
+                function buildSidebar(container) {
+                    container.innerHTML = '';
+                    CONFIG.forEach(group => {
+                        const h5 = document.createElement('h5');
+                        h5.className = 'text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3 mt-6 pl-3 first:mt-0';
+                        h5.textContent = group.category;
+                        container.appendChild(h5);
 
-// UI Setup Helpers
-function initNotesTree() {
-    const treeContainer = document.getElementById('notes-tree');
-    if (!treeContainer) return;
+                        const ul = document.createElement('ul');
+                        ul.className = 'space-y-1 border-l border-zinc-800 ml-3';
 
-    function buildTreeHTML(structure) {
-        let html = '';
-        structure.forEach(item => {
-            if (item.type === 'folder') {
-                html += `
-                    <li class="tree-item tree-folder expanded">
-                        <div class="tree-content">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>${item.title}</span>
-                        </div>
-                        <ul class="tree-children">${buildTreeHTML(item.children)}</ul>
-                    </li>`;
-            } else {
-                const icon = isImageFile(item.name) ? 'fa-image' : 'fa-file';
-                html += `<li class="tree-item tree-file" data-file="${item.name}"><i class="far ${icon}"></i><span>${item.title}</span></li>`;
-            }
-        });
-        return html;
-    }
+                        group.items.forEach(item => {
+                            const li = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.className = 'block pl-4 py-2 text-sm text-zinc-400 hover:text-white border-l-2 border-transparent hover:border-zinc-500 transition-all cursor-pointer sidebar-link';
+                            a.textContent = item.title;
+                            a.dataset.title = item.title;
+                            a.onclick = () => {
+                                loadDoc(item, group.category);
+                                $$('.sidebar-link').forEach(l => l.classList.remove('sidebar-link-active'));
+                                a.classList.add('sidebar-link-active');
+                                if (!els.mobileMenu.classList.contains('translate-x-full')) {
+                                    toggleMobile();
+                                }
+                            };
+                            li.appendChild(a);
+                            ul.appendChild(li);
+                        });
+                        container.appendChild(ul);
+                    });
+                }
 
-    treeContainer.innerHTML = buildTreeHTML(notesStructure);
+                function updateActiveSidebar(title) {
+                    $$('.sidebar-link').forEach(link => {
+                        link.classList.toggle('sidebar-link-active', link.dataset.title === title);
+                    });
+                }
 
-    treeContainer.addEventListener('click', (e) => {
-        const folder = e.target.closest('.tree-content');
-        if (folder) folder.parentElement.classList.toggle('expanded');
+                let searchTimer;
+                async function performSearch(query, resultsEl) {
+                    if (!query || query.length < 2) {
+                        resultsEl.classList.add('hidden');
+                        return;
+                    }
 
-        const file = e.target.closest('.tree-file');
-        if (file) loadMarkdownFile(file);
-    });
-}
+                    const q = query.toLowerCase();
+                    const results = [];
 
-function initMobileMenu() {
-    const btn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.mobile-nav');
-    btn?.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        nav.classList.toggle('active');
-    });
-}
+                    for (const group of CONFIG) {
+                        for (const item of group.items) {
+                            let content = state.cache[item.path];
 
-function initMobileSidebar() {
-    const sidebar = document.querySelector('.notes-sidebar');
-    const toggle = document.getElementById('sidebarToggle');
-    const close = document.getElementById('closeSidebar');
-    toggle?.addEventListener('click', () => sidebar.classList.add('active'));
-    close?.addEventListener('click', () => sidebar.classList.remove('active'));
-}
+                            if (!content) {
+                                try {
+                                    const res = await fetch(item.path);
+                                    if (res.ok) {
+                                        content = await res.text();
+                                        state.cache[item.path] = content;
+                                    }
+                                } catch (e) {
+                                    continue;
+                                }
+                            }
 
-function initMarkdownConverter() {
-    window.markdownConverter = new showdown.Converter({ tables: true, tasklists: true });
-}
+                            let score = 0;
+                            let context = '';
 
-function loadNoteFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const page = params.get('page');
-    if (page) {
-        const el = document.querySelector(`[data-file="${page}"]`);
-        if (el) loadMarkdownFile(el);
-    }
-}
+                            const titleLower = item.title.toLowerCase();
+                            const categoryLower = group.category.toLowerCase();
+                            const contentLower = content ? content.toLowerCase() : '';
+
+                            if (titleLower.includes(q)) {
+                                score += 10;
+                                context = 'Match in title';
+                            }
+
+                            if (categoryLower.includes(q)) {
+                                score += 5;
+                            }
+
+                            if (contentLower.includes(q)) {
+                                score += 3;
+                                const idx = contentLower.indexOf(q);
+                                if (idx !== -1 && !context) {
+                                    const start = Math.max(0, idx - 40);
+                                    const end = Math.min(content.length, idx + q.length + 40);
+                                    context = '...' + content.substring(start, end).replace(/\n/g, ' ').trim() + '...';
+                                }
+                            }
+
+                            if (score > 0) {
+                                results.push({ item, category: group.category, score, context });
+                            }
+                        }
+                    }
+
+                    results.sort((a, b) => b.score - a.score);
+
+                    if (results.length === 0) {
+                        resultsEl.innerHTML = '<div class="search-result-item text-center"><i class="fas fa-search text-zinc-600 text-2xl mb-2"></i><p class="text-zinc-500 text-sm">No results for "<span class="text-white">' + query + '</span>"</p></div>';
+                    } else {
+                        resultsEl.innerHTML = results.slice(0, 10).map(r => {
+                            const hl = (text) => text.replace(new RegExp('(' + query + ')', 'gi'), '<span class="search-highlight">$1</span>');
+                            return '<div class="search-result-item" onclick="window.selectSearchResult(\'' + r.item.path + '\', \'' + r.category + '\')"><div class="search-result-category">' + r.category + '</div><div class="search-result-title">' + hl(r.item.title) + '</div>' + (r.context ? '<div class="text-xs text-zinc-500 mt-1 truncate">' + hl(r.context) + '</div>' : '') + '</div>';
+                        }).join('');
+                    }
+
+                    resultsEl.classList.remove('hidden');
+                }
+
+                window.selectSearchResult = (path, category) => {
+                    const item = CONFIG.flatMap(g => g.items).find(i => i.path === path);
+                    if (item) {
+                        enterDocs();
+                        loadDoc(item, category);
+                        els.searchResults.classList.add('hidden');
+                        els.mobileSearchResults.classList.add('hidden');
+                        els.searchGlobal.value = '';
+                        els.searchMobile.value = '';
+                        if (!els.mobileMenu.classList.contains('translate-x-full')) {
+                            toggleMobile();
+                        }
+                    }
+                };
+
+                function toggleMobile() {
+                    const isClosed = els.mobileMenu.classList.contains('translate-x-full');
+                    els.mobileMenu.classList.toggle('translate-x-full');
+                    document.body.style.overflow = isClosed ? 'hidden' : '';
+                }
+
+                // EVENT LISTENERS
+                els.searchGlobal.addEventListener('input', e => {
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(() => performSearch(e.target.value, els.searchResults), 300);
+                });
+
+                els.searchMobile.addEventListener('input', e => {
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(() => performSearch(e.target.value, els.mobileSearchResults), 300);
+                });
+
+                els.mobileToggle.addEventListener('click', toggleMobile);
+
+                document.addEventListener('click', e => {
+                    if (!$('search-container') || !$('search-container').contains(e.target)) {
+                        els.searchResults.classList.add('hidden');
+                    }
+                });
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape') {
+                        els.searchResults.classList.add('hidden');
+                        els.mobileSearchResults.classList.add('hidden');
+                        if (!els.mobileMenu.classList.contains('translate-x-full')) {
+                            toggleMobile();
+                        }
+                    }
+                });
+
+                // INIT
+                buildSidebar(els.desktopSidebar);
+                buildSidebar(els.mobileSidebar);
+
+                console.log('%c✓ Amped FIVE Docs Ready', 'color: #fbbf24; font-weight: bold; font-size: 14px');
+            })();
