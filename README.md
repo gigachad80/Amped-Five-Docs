@@ -1,6 +1,5 @@
 # Amped-Five-Docs
-### Amped Five Documentations &amp; Cheatsheet for Law Enforcement Agencies. Vibe-coded this because I was in a rush , will fix it later
-
+### Amped Five Documentations &amp; Cheatsheet for Law Enforcement Agencies. 
 # Project To-Do List
 
 
